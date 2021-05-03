@@ -126,7 +126,11 @@ class JuliaView @JvmOverloads constructor(
     }
 
     fun updateView(panX: Int? = null, panY: Int? = null, zoom: Float? = null) {
-        zoom?.let { this.zoom = max(250, (this.zoom * zoom).toInt()) }
+        zoom?.let {
+            this.zoom = max(250, (this.zoom * it).toInt())
+            this.panX = (this.panX * it).toInt()
+            this.panY = (this.panY * it).toInt()
+        }
         panX?.let { this.panX -= it }
         panY?.let { this.panY += it }
         invalidate()

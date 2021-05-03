@@ -80,6 +80,12 @@ class MainFragment : Fragment() {
         binding.reset.setOnClickListener {
             viewModel.resetJuliaView()
         }
+        binding.zoomIn.setOnClickListener {
+            viewModel.zoomJuliaView(2f)
+        }
+        binding.zoomOut.setOnClickListener {
+            viewModel.zoomJuliaView(0.5f)
+        }
     }
 
     private fun observeData() {

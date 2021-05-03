@@ -50,6 +50,10 @@ class MainViewModel() : ViewModel() {
         updateJuliaView.value = c
     }
 
+    fun zoomJuliaView(zoom: Float) {
+        zoomJuliaView.value = zoom
+    }
+
     fun resetJuliaView() {
         resetJuliaView.onNext(true)
     }
