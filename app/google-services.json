@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "286126594359",
+    "project_id": "julia-91dac",
+    "storage_bucket": "julia-91dac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286126594359:android:05ace155b8ab093166a2b2",
+        "android_client_info": {
+          "package_name": "com.tijiebo.julia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286126594359-jbftu3ds42t0pgngt9ucebs59emd6dg6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC72ucwSVuhHNb_N-wZWbwIoDx1r7T7GOo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286126594359-jbftu3ds42t0pgngt9ucebs59emd6dg6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

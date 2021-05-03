@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Julia</string>
+    <string name="capture">Capture</string>
+
+    <string name="menu_highlights">Highlights: </string>
+    <string name="menu_custom">Custom</string>
+
+    <string name="upload_complete">Upload completed</string>
+    <string name="upload_failed">Upload failed</string>
+    <string name="upload_pending">Uploading…</string>
+
+    <string name="custom_input_title">Enter constant</string>
+    <string name="custom_input_cta">Create</string>
+    <string name="label_x">\u211D</string>
+    <string name="plus"> \u002B </string>
+    <string name="complex">ί</string>
+
+</resources>
