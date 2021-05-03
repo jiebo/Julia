@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.slider.Slider
 import com.tijiebo.julia.MainActivity
 import com.tijiebo.julia.R
 import com.tijiebo.julia.databinding.MainFragmentBinding
@@ -62,18 +63,6 @@ class MainFragment : Fragment() {
                 viewModel.getJuliaImage(this, JuliaImage.getNameFrom(this.getC()))
             }
         }
-//        binding.highlights.apply {
-//            for (item in JuliaHighlights.getAll()) {
-//                this.addView(
-//                    (LayoutInflater.from(context)
-//                        .inflate(R.layout.layout_highlights_chip, this, false) as? Chip)?.apply {
-//                        text = item.name
-//                        isCheckable = false
-//                        setOnClickListener { viewModel.updateJuliaView(item.c) }
-//                    }
-//                )
-//            }
-//        }
         binding.highlights.apply {
             adapter = HighlightsAdapter(JuliaHighlights.getAll()) { c: PointF ->
                 viewModel.updateJuliaView(c)
@@ -88,14 +77,23 @@ class MainFragment : Fragment() {
             activity?.showGallery()
             binding.newIndicator.visibility = View.GONE
         }
+        binding.reset.setOnClickListener {
+            viewModel.resetJuliaView()
+        }
     }
 
     private fun observeData() {
         disposables.add(viewModel.uploadProgress.subscribe {
             setUploadProgress(it)
         })
+        disposables.add(viewModel.resetJuliaView.subscribe {
+            binding.juliaView.reset()
+        })
         viewModel.updateJuliaView.observe(viewLifecycleOwner, {
             binding.juliaView.updateConstant(it)
+        })
+        viewModel.zoomJuliaView.observe(viewLifecycleOwner, {
+            binding.juliaView.updateView(zoom = it)
         })
     }
 

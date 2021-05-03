@@ -4,6 +4,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
-        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         tools:text="-0.8i" />

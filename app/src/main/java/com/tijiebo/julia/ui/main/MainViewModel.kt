@@ -21,7 +21,9 @@ class MainViewModel() : ViewModel() {
     private val storage = Firebase.storage
 
     val uploadProgress: PublishSubject<Float> = PublishSubject.create()
+    val resetJuliaView: PublishSubject<Boolean> = PublishSubject.create()
     val updateJuliaView: MutableLiveData<PointF> = MutableLiveData(PointF(0f, -0.8f))
+    val zoomJuliaView: MutableLiveData<Float> = MutableLiveData(1f)
     val imagesOnCloud: MutableLiveData<MutableList<StorageReference>> = MutableLiveData()
 
     fun getJuliaImage(view: View, name: String) {
@@ -48,6 +50,10 @@ class MainViewModel() : ViewModel() {
         updateJuliaView.value = c
     }
 
+    fun resetJuliaView() {
+        resetJuliaView.onNext(true)
+    }
+
     fun getFromCloud() {
         val listRef = storage.reference
         listRef.listAll()
@@ -55,6 +61,7 @@ class MainViewModel() : ViewModel() {
     }
 
     override fun onCleared() {
+        resetJuliaView.onComplete()
         uploadProgress.onComplete()
         super.onCleared()
     }
