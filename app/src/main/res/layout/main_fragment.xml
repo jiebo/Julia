@@ -61,43 +61,34 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/zoom_in"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
+        style="@style/IconStyle"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        app:backgroundTint="@android:color/transparent"
-        app:cornerRadius="24dp"
         app:icon="@drawable/ic_zoom_in_24"
-        app:iconPadding="0dp"
-        app:iconTint="@color/purple_500"
         app:layout_constraintBottom_toTopOf="@id/zoom_out"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/reset" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/zoom_out"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
+        style="@style/IconStyle"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        app:backgroundTint="@android:color/transparent"
-        app:cornerRadius="24dp"
         app:icon="@drawable/ic_zoom_out_24"
-        app:iconPadding="0dp"
-        app:iconTint="@color/purple_500"
         app:layout_constraintBottom_toTopOf="@id/reset"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/reset" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/reset"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
+        style="@style/IconStyle"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        app:backgroundTint="@android:color/transparent"
-        app:cornerRadius="24dp"
         app:icon="@drawable/ic_location_24"
-        app:iconPadding="0dp"
-        app:iconTint="@color/purple_500"
-
         app:layout_constraintBottom_toBottomOf="@id/julia_view"
-        app:layout_constraintStart_toEndOf="@id/julia_view" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/julia_view"
+        app:rippleColor="@color/purple_200" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/label"
@@ -151,34 +142,29 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:rippleColor="@color/purple_200" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/more"
-                style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                style="@style/IconStyle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="4dp"
                 app:backgroundTint="#EEE"
-                app:cornerRadius="48dp"
                 app:icon="@drawable/ic_add_24"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                app:iconTint="@color/purple_500"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/gallery"
-                style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                style="@style/IconStyle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="4dp"
                 app:backgroundTint="#EEE"
-                app:cornerRadius="48dp"
                 app:icon="@drawable/ic_photo_library_24"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                app:iconTint="@color/purple_500"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

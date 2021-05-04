@@ -15,7 +15,8 @@
 
     <string name="custom_input_title">Enter constant</string>
     <string name="custom_input_cta">Create</string>
-    <string name="label_x">\u211D</string>
+    <string name="label_x">.3</string>
+    <string name="label_y">.6</string>
     <string name="plus"> \u002B </string>
     <string name="complex">ί</string>
 
