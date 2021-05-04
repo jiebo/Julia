@@ -10,8 +10,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.storage.StorageReference
 import com.tijiebo.julia.R
+import com.tijiebo.julia.ui.gallery.viewmodel.GalleryViewModel
 
-class GalleryAdapter(private val list: MutableList<Uri>) :
+class GalleryAdapter(private val list: MutableList<Uri>, private val vm: GalleryViewModel) :
     RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {
@@ -43,6 +44,7 @@ class GalleryAdapter(private val list: MutableList<Uri>) :
                         .placeholder(R.drawable.ic_image_24)
                 )
                 .into(image)
+            image.setOnClickListener { vm.showFullView(uri) }
         }
     }
 }

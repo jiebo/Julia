@@ -1,7 +1,9 @@
 package com.tijiebo.julia
 
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.tijiebo.julia.ui.gallery.FullViewDialogFragment
 import com.tijiebo.julia.ui.gallery.GalleryFragment
 import com.tijiebo.julia.ui.main.MainFragment
 
@@ -24,6 +26,12 @@ class MainActivity : AppCompatActivity() {
             addToBackStack(null)
             commit()
         }
+    }
+
+    fun showFullView(uri: Uri) {
+        FullViewDialogFragment.newInstance(uri).show(
+            supportFragmentManager, FullViewDialogFragment.TAG
+        )
     }
 
     override fun onBackPressed() {

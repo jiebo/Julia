@@ -13,6 +13,7 @@ import com.tijiebo.julia.databinding.GalleryFragmentBinding
 import com.tijiebo.julia.ui.gallery.viewmodel.GalleryViewModel
 import com.tijiebo.julia.ui.gallery.viewmodel.GalleryViewModel.GalleryStatus
 import com.tijiebo.julia.ui.main.viewmodel.MainViewModel
+import io.reactivex.disposables.CompositeDisposable
 
 class GalleryFragment : Fragment() {
 
@@ -23,10 +24,11 @@ class GalleryFragment : Fragment() {
 
     private var activity: MainActivity? = null
     private lateinit var viewModel: GalleryViewModel
+    private val disposables = CompositeDisposable()
     private var _binding: GalleryFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private val galleryAdapter = GalleryAdapter(mutableListOf())
+    private var galleryAdapter: GalleryAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +45,7 @@ class GalleryFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(GalleryViewModel::class.java)
         viewModel.getFromCloud()
         observeData()
+        initialiseViews()
     }
 
     override fun onAttach(context: Context) {
@@ -50,16 +53,13 @@ class GalleryFragment : Fragment() {
         activity = context as? MainActivity
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initialiseViews()
-    }
-
     private fun initialiseViews() {
         binding.galleryList.apply {
             layoutManager =
                 GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
-            adapter = galleryAdapter
+            adapter = GalleryAdapter(mutableListOf(), viewModel).apply {
+                galleryAdapter = this
+            }
         }
         binding.toolbar.setNavigationOnClickListener { activity?.onBackPressed() }
         binding.explore.setOnClickListener { activity?.onBackPressed() }
@@ -82,9 +82,14 @@ class GalleryFragment : Fragment() {
                     binding.progress.visibility = View.GONE
                     binding.emptyContainer.visibility = View.GONE
                     binding.galleryList.visibility = View.VISIBLE
-                    galleryAdapter.updateData(it.list)
+                    galleryAdapter?.updateData(it.list)
                 }
             }
         })
+        disposables.add(
+            viewModel.fullView.subscribe {
+                activity?.showFullView(it)
+            }
+        )
     }
 }

@@ -18,6 +18,7 @@ class GalleryViewModel : ViewModel() {
     private val repo = GalleryRepo()
     private val disposables = CompositeDisposable()
     val uploadProgress: PublishSubject<UploadStatus> = PublishSubject.create()
+    val fullView: PublishSubject<Uri> = PublishSubject.create()
     val imagesOnCloud: MutableLiveData<GalleryStatus> = MutableLiveData()
 
     fun getJuliaImage(view: View, name: String) {
@@ -57,6 +58,16 @@ class GalleryViewModel : ViewModel() {
                     imagesOnCloud.postValue(GalleryStatus.Empty)
                 })
         )
+    }
+
+    fun showFullView(uri: Uri) {
+        fullView.onNext(uri)
+    }
+
+    override fun onCleared() {
+        uploadProgress.onComplete()
+        fullView.onComplete()
+        super.onCleared()
     }
 
     sealed class UploadStatus {
