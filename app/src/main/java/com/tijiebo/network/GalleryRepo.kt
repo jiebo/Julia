@@ -31,6 +31,10 @@ class GalleryRepo {
             storage.reference.listAll()
                 .addOnSuccessListener {
                     var count = it.items.size
+                    if (count == 0) {
+                        emitter.onComplete()
+                        return@addOnSuccessListener
+                    }
                     for (item in it.items) {
                         item.downloadUrl
                             .addOnSuccessListener { uri ->

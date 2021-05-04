@@ -62,6 +62,7 @@ class GalleryFragment : Fragment() {
             adapter = galleryAdapter
         }
         binding.toolbar.setNavigationOnClickListener { activity?.onBackPressed() }
+        binding.explore.setOnClickListener { activity?.onBackPressed() }
     }
 
     private fun observeData() {

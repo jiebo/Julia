@@ -172,13 +172,14 @@
                 android:layout_width="8dp"
                 android:layout_height="8dp"
                 android:layout_gravity="top|start"
-                android:layout_margin="16dp"
+                android:layout_margin="10dp"
                 android:backgroundTint="@android:color/holo_red_dark"
                 android:padding="0dp"
                 android:visibility="gone"
                 app:cardCornerRadius="4dp"
                 app:layout_constraintEnd_toEndOf="@id/gallery"
-                app:layout_constraintTop_toTopOf="@id/gallery" />
+                app:layout_constraintTop_toTopOf="@id/gallery"
+                tools:visibility="visible" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
