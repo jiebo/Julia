@@ -46,7 +46,6 @@ class JuliaView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         canvas?.apply {
-            println("Zoom is $zoom, Pan X is $panX, Pan Y is $panY")
             for (w in 0..width) {
                 for (h in 0..height) {
                     val x = centerX() + panX - w

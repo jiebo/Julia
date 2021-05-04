@@ -104,6 +104,18 @@ class MainFragment : Fragment() {
         mainVm.zoomJuliaView.observe(viewLifecycleOwner, {
             binding.juliaView.updateView(zoom = it)
         })
+        mainVm.enableZoomIn.observe(viewLifecycleOwner, {
+            binding.zoomIn.apply {
+                isEnabled = it
+                alpha = if (it) 1f else 0.12f
+            }
+        })
+        mainVm.enableZoomOut.observe(viewLifecycleOwner, {
+            binding.zoomOut.apply {
+                isEnabled = it
+                alpha = if (it) 1f else 0.12f
+            }
+        })
     }
 
     private fun setUploadProgress(uploadStatus: GalleryViewModel.UploadStatus) {

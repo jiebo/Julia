@@ -10,17 +10,32 @@ class MainViewModel() : ViewModel() {
     val resetJuliaView: PublishSubject<Boolean> = PublishSubject.create()
     val updateJuliaView: MutableLiveData<PointF> = MutableLiveData(PointF(0f, -0.8f))
     val zoomJuliaView: MutableLiveData<Float> = MutableLiveData(1f)
+    val enableZoomIn: MutableLiveData<Boolean> = MutableLiveData(true)
+    val enableZoomOut: MutableLiveData<Boolean> = MutableLiveData(false)
+
+    var zoomLevel = 0
 
     fun updateJuliaView(c: PointF) {
         updateJuliaView.value = c
+        zoomLevel = 0
+        observeZoomControls()
     }
 
     fun zoomJuliaView(zoom: Float) {
         zoomJuliaView.value = zoom
+        zoomLevel += if (zoom > 1) 1 else -1
+        observeZoomControls()
     }
 
     fun resetJuliaView() {
         resetJuliaView.onNext(true)
+        zoomLevel = 0
+        observeZoomControls()
+    }
+
+    private fun observeZoomControls() {
+        enableZoomIn.postValue(zoomLevel <= 15)
+        enableZoomOut.postValue(zoomLevel > 0)
     }
 
     override fun onCleared() {
