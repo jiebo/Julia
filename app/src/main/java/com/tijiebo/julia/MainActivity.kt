@@ -2,7 +2,7 @@ package com.tijiebo.julia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.tijiebo.julia.ui.main.GalleryFragment
+import com.tijiebo.julia.ui.gallery.GalleryFragment
 import com.tijiebo.julia.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {

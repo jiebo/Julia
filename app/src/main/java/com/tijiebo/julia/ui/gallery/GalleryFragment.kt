@@ -1,4 +1,4 @@
-package com.tijiebo.julia.ui.main
+package com.tijiebo.julia.ui.gallery
 
 import android.content.Context
 import android.os.Bundle
@@ -10,6 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.tijiebo.julia.MainActivity
 import com.tijiebo.julia.databinding.GalleryFragmentBinding
+import com.tijiebo.julia.ui.gallery.viewmodel.GalleryViewModel
+import com.tijiebo.julia.ui.gallery.viewmodel.GalleryViewModel.GalleryStatus
+import com.tijiebo.julia.ui.main.viewmodel.MainViewModel
 
 class GalleryFragment : Fragment() {
 
@@ -19,7 +22,7 @@ class GalleryFragment : Fragment() {
     }
 
     private var activity: MainActivity? = null
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: GalleryViewModel
     private var _binding: GalleryFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -37,7 +40,7 @@ class GalleryFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(GalleryViewModel::class.java)
         viewModel.getFromCloud()
         observeData()
     }
@@ -58,11 +61,29 @@ class GalleryFragment : Fragment() {
                 GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
             adapter = galleryAdapter
         }
+        binding.toolbar.setNavigationOnClickListener { activity?.onBackPressed() }
     }
 
     private fun observeData() {
         viewModel.imagesOnCloud.observe(viewLifecycleOwner, {
-            galleryAdapter.updateData(it)
+            when (it) {
+                is GalleryStatus.Pending -> {
+                    binding.progress.visibility = View.VISIBLE
+                    binding.emptyContainer.visibility = View.GONE
+                    binding.galleryList.visibility = View.GONE
+                }
+                is GalleryStatus.Empty -> {
+                    binding.progress.visibility = View.GONE
+                    binding.emptyContainer.visibility = View.VISIBLE
+                    binding.galleryList.visibility = View.GONE
+                }
+                is GalleryStatus.Success -> {
+                    binding.progress.visibility = View.GONE
+                    binding.emptyContainer.visibility = View.GONE
+                    binding.galleryList.visibility = View.VISIBLE
+                    galleryAdapter.updateData(it.list)
+                }
+            }
         })
     }
 }

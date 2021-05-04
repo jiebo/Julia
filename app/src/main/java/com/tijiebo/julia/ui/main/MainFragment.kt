@@ -11,12 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.slider.Slider
 import com.tijiebo.julia.MainActivity
 import com.tijiebo.julia.R
 import com.tijiebo.julia.databinding.MainFragmentBinding
+import com.tijiebo.julia.ui.gallery.viewmodel.GalleryViewModel
 import com.tijiebo.julia.ui.julia.models.JuliaHighlights
 import com.tijiebo.julia.ui.julia.models.JuliaImage
+import com.tijiebo.julia.ui.main.viewmodel.MainViewModel
 import io.reactivex.disposables.CompositeDisposable
 
 class MainFragment : Fragment() {
@@ -27,7 +28,8 @@ class MainFragment : Fragment() {
     }
 
     private var activity: MainActivity? = null
-    private lateinit var viewModel: MainViewModel
+    private lateinit var mainVm: MainViewModel
+    private lateinit var galleryVm: GalleryViewModel
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
     private val disposables = CompositeDisposable()
@@ -43,7 +45,8 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        mainVm = ViewModelProvider(this).get(MainViewModel::class.java)
+        galleryVm = ViewModelProvider(this).get(GalleryViewModel::class.java)
         observeData()
     }
 
@@ -60,12 +63,12 @@ class MainFragment : Fragment() {
     private fun initialiseViews() {
         binding.shutter.setOnClickListener {
             binding.juliaView.apply {
-                viewModel.getJuliaImage(this, JuliaImage.getNameFrom(this.getC()))
+                galleryVm.getJuliaImage(this, JuliaImage.getNameFrom(this.getC()))
             }
         }
         binding.highlights.apply {
             adapter = HighlightsAdapter(JuliaHighlights.getAll()) { c: PointF ->
-                viewModel.updateJuliaView(c)
+                mainVm.updateJuliaView(c)
             }
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -78,44 +81,44 @@ class MainFragment : Fragment() {
             binding.newIndicator.visibility = View.GONE
         }
         binding.reset.setOnClickListener {
-            viewModel.resetJuliaView()
+            mainVm.resetJuliaView()
         }
         binding.zoomIn.setOnClickListener {
-            viewModel.zoomJuliaView(2f)
+            mainVm.zoomJuliaView(2f)
         }
         binding.zoomOut.setOnClickListener {
-            viewModel.zoomJuliaView(0.5f)
+            mainVm.zoomJuliaView(0.5f)
         }
     }
 
     private fun observeData() {
-        disposables.add(viewModel.uploadProgress.subscribe {
+        disposables.add(galleryVm.uploadProgress.subscribe {
             setUploadProgress(it)
         })
-        disposables.add(viewModel.resetJuliaView.subscribe {
+        disposables.add(mainVm.resetJuliaView.subscribe {
             binding.juliaView.reset()
         })
-        viewModel.updateJuliaView.observe(viewLifecycleOwner, {
+        mainVm.updateJuliaView.observe(viewLifecycleOwner, {
             binding.juliaView.updateConstant(it)
         })
-        viewModel.zoomJuliaView.observe(viewLifecycleOwner, {
+        mainVm.zoomJuliaView.observe(viewLifecycleOwner, {
             binding.juliaView.updateView(zoom = it)
         })
     }
 
-    private fun setUploadProgress(progress: Float) {
+    private fun setUploadProgress(uploadStatus: GalleryViewModel.UploadStatus) {
         binding.progressTextContainer.visibility = View.VISIBLE
         binding.progressIndicator.visibility = View.VISIBLE
-        when {
-            progress < 0 -> {
+        when (uploadStatus) {
+            is GalleryViewModel.UploadStatus.Failure -> {
                 binding.progressIndicator.progress = 0
                 binding.progressText.text = getString(R.string.upload_failed)
             }
-            progress < 1 -> {
-                binding.progressIndicator.progress = (progress * 100).toInt()
+            is GalleryViewModel.UploadStatus.Pending -> {
+                binding.progressIndicator.progress = (uploadStatus.progress * 100).toInt()
                 binding.progressText.text = getString(R.string.upload_pending)
             }
-            progress >= 1 -> {
+            is GalleryViewModel.UploadStatus.Success -> {
                 binding.progressIndicator.progress = 100
                 binding.progressText.text = getString(R.string.upload_complete)
                 binding.newIndicator.visibility = View.VISIBLE
@@ -142,7 +145,7 @@ class MainFragment : Fragment() {
             .setPositiveButton(R.string.custom_input_cta) { dialog, _ ->
                 val cX = coefficientX.text.toString().toFloatOrNull() ?: 0f
                 val cY = coefficientY.text.toString().toFloatOrNull() ?: 0f
-                viewModel.updateJuliaView(PointF(cX, cY))
+                mainVm.updateJuliaView(PointF(cX, cY))
             }
             .setNegativeButton(android.R.string.cancel, null)
             .show()

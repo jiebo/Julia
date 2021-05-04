@@ -1,189 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    tools:context=".ui.main.MainFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.main.MainFragment"
-        android:animateLayoutChanges="true">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/app_name" />
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/progress_indicator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:indicatorColor="@color/teal_200"
-            android:visibility="gone"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:progress="75" />
+        android:id="@+id/progress_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:indicatorColor="@color/teal_200"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:progress="75" />
 
     <com.google.android.material.card.MaterialCardView
-            android:id="@+id/progress_text_container"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/progress_indicator"
-            app:cardBackgroundColor="@color/cardview_dark_background"
-            app:cardCornerRadius="8dp"
-            android:layout_margin="8dp">
+        android:id="@+id/progress_text_container"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/cardview_dark_background"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintTop_toBottomOf="@id/progress_indicator">
 
         <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/progress_text"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:textColor="@color/cardview_light_background"
-                tools:text="Upload Complete" />
+            android:id="@+id/progress_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/cardview_light_background"
+            tools:text="Upload Complete" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.tijiebo.julia.ui.julia.JuliaView
-            android:id="@+id/julia_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_margin="56dp"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintBottom_toTopOf="@id/bottom_container"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+        android:id="@+id/julia_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="56dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_container"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-            android:id="@+id/zoom_in"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            app:layout_constraintBottom_toTopOf="@id/zoom_out"
-            app:layout_constraintStart_toStartOf="@id/reset"
-            app:iconPadding="0dp"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
-            app:backgroundTint="@android:color/transparent"
-            app:iconTint="@color/purple_500"
-            app:cornerRadius="24dp"
-            app:icon="@drawable/ic_zoom_in_24" />
+        android:id="@+id/zoom_in"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:backgroundTint="@android:color/transparent"
+        app:cornerRadius="24dp"
+        app:icon="@drawable/ic_zoom_in_24"
+        app:iconPadding="0dp"
+        app:iconTint="@color/purple_500"
+        app:layout_constraintBottom_toTopOf="@id/zoom_out"
+        app:layout_constraintStart_toStartOf="@id/reset" />
 
     <com.google.android.material.button.MaterialButton
-            android:id="@+id/zoom_out"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            app:layout_constraintBottom_toTopOf="@id/reset"
-            app:layout_constraintStart_toStartOf="@id/reset"
-            app:iconPadding="0dp"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
-            app:backgroundTint="@android:color/transparent"
-            app:iconTint="@color/purple_500"
-            app:cornerRadius="24dp"
-            app:icon="@drawable/ic_zoom_out_24" />
+        android:id="@+id/zoom_out"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:backgroundTint="@android:color/transparent"
+        app:cornerRadius="24dp"
+        app:icon="@drawable/ic_zoom_out_24"
+        app:iconPadding="0dp"
+        app:iconTint="@color/purple_500"
+        app:layout_constraintBottom_toTopOf="@id/reset"
+        app:layout_constraintStart_toStartOf="@id/reset" />
 
     <com.google.android.material.button.MaterialButton
-            android:id="@+id/reset"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            app:layout_constraintBottom_toBottomOf="@id/julia_view"
-            app:layout_constraintStart_toEndOf="@id/julia_view"
-            app:iconPadding="0dp"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
-            app:backgroundTint="@android:color/transparent"
-            app:iconTint="@color/purple_500"
-            app:cornerRadius="24dp"
-            app:icon="@drawable/ic_location_24" />
+        android:id="@+id/reset"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:backgroundTint="@android:color/transparent"
+        app:cornerRadius="24dp"
+        app:icon="@drawable/ic_location_24"
+        app:iconPadding="0dp"
+        app:iconTint="@color/purple_500"
+        app:layout_constraintBottom_toBottomOf="@id/julia_view"
+        app:layout_constraintStart_toEndOf="@id/julia_view" />
 
     <com.google.android.material.button.MaterialButton
-            android:id="@+id/label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/bottom_container"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/menu_highlights"
-            android:textColor="@color/cardview_dark_background"
-            android:textAllCaps="false"
-            style="@style/Widget.MaterialComponents.Button.TextButton" />
+        android:id="@+id/label"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_highlights"
+        android:textAllCaps="false"
+        android:textColor="@color/cardview_dark_background"
+        app:layout_constraintBottom_toTopOf="@id/bottom_container"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/highlights"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/bottom_container"
-            app:layout_constraintStart_toEndOf="@id/label"
-            android:clipToPadding="false"
-            tools:listitem="@layout/highlights_item"
-            tools:itemCount="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:orientation="horizontal" />
+        android:id="@+id/highlights"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/bottom_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/label"
+        tools:itemCount="1"
+        tools:listitem="@layout/highlights_item" />
 
     <com.google.android.material.card.MaterialCardView
-            android:id="@+id/bottom_container"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:cardElevation="16dp"
-            app:cardBackgroundColor="#EEEEEE"
-            app:cardCornerRadius="0dp"
-            app:layout_constraintBottom_toBottomOf="parent">
+        android:id="@+id/bottom_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#EEEEEE"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <com.google.android.material.button.MaterialButton
-                    android:layout_width="54dp"
-                    android:id="@+id/shutter"
-                    android:layout_height="64dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="4dp"
-                    app:iconPadding="0dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:iconTint="#EEEEEE"
-                    app:cornerRadius="48dp"
-                    app:iconGravity="textStart"
-                    app:icon="@drawable/ic_circle_48" />
+                android:id="@+id/shutter"
+                android:layout_width="54dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:layout_margin="4dp"
+                app:cornerRadius="48dp"
+                app:icon="@drawable/ic_circle_48"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconTint="#EEEEEE"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButton
-                    android:layout_width="56dp"
-                    android:id="@+id/more"
-                    android:layout_height="56dp"
-                    app:iconPadding="0dp"
-                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
-                    app:backgroundTint="#EEE"
-                    app:iconTint="@color/purple_500"
-                    app:cornerRadius="48dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:iconGravity="textStart"
-                    app:icon="@drawable/ic_add_24" />
+                android:id="@+id/more"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                app:backgroundTint="#EEE"
+                app:cornerRadius="48dp"
+                app:icon="@drawable/ic_add_24"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconTint="@color/purple_500"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButton
-                    android:layout_width="56dp"
-                    android:id="@+id/gallery"
-                    android:layout_height="56dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:iconPadding="0dp"
-                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
-                    app:backgroundTint="#EEE"
-                    app:iconTint="@color/purple_500"
-                    app:cornerRadius="48dp"
-                    app:iconGravity="textStart"
-                    app:icon="@drawable/ic_photo_library_24" />
+                android:id="@+id/gallery"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                app:backgroundTint="#EEE"
+                app:cornerRadius="48dp"
+                app:icon="@drawable/ic_photo_library_24"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconTint="@color/purple_500"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/new_indicator"
-                    android:layout_width="8dp"
-                    android:layout_height="8dp"
-                    android:layout_gravity="top|start"
-                    app:layout_constraintTop_toTopOf="@id/gallery"
-                    app:layout_constraintEnd_toEndOf="@id/gallery"
-                    app:cardCornerRadius="4dp"
-                    android:visibility="gone"
-                    android:padding="0dp"
-                    android:layout_margin="16dp"
-                    android:backgroundTint="@android:color/holo_red_dark" />
+                android:id="@+id/new_indicator"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_gravity="top|start"
+                android:layout_margin="16dp"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:padding="0dp"
+                android:visibility="gone"
+                app:cardCornerRadius="4dp"
+                app:layout_constraintEnd_toEndOf="@id/gallery"
+                app:layout_constraintTop_toTopOf="@id/gallery" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

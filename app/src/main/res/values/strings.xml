@@ -3,7 +3,11 @@
     <string name="capture">Capture</string>
 
     <string name="menu_highlights">Highlights: </string>
+    <string name="appbar_highlights">Highlights</string>
     <string name="menu_custom">Custom</string>
+
+    <string name="gallery_empty">Nothing is on the cloud!\nTake a snapshot to never lose your favourite Julia</string>
+    <string name="gallery_empty_button">Explore</string>
 
     <string name="upload_complete">Upload completed</string>
     <string name="upload_failed">Upload failed</string>
