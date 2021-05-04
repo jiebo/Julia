@@ -2,15 +2,9 @@ package com.tijiebo.julia.ui.julia
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.PointF
-import android.graphics.Typeface
+import android.graphics.*
 import android.util.AttributeSet
-import android.view.GestureDetector
-import android.view.MotionEvent
-import android.view.ScaleGestureDetector
-import android.view.View
+import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.tijiebo.julia.R
@@ -46,13 +40,18 @@ class JuliaView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         canvas?.apply {
+            val list = mutableListOf<Float>()
             for (w in 0..width) {
                 for (h in 0..height) {
                     val x = centerX() + panX - w
                     val y = h - centerY() + panY
-                    if (isValid(x, y)) drawCircle(w.toFloat(), h.toFloat(), 1f, painter)
+                    if (isValid(x, y)) {
+                        list.add(w.toFloat())
+                        list.add(h.toFloat())
+                    }
                 }
             }
+            drawPoints(list.toFloatArray(), painter)
             drawLine(
                 centerX() + panX - 50f,
                 centerY() - panY,

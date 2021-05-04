@@ -14,7 +14,7 @@ class GalleryRepo {
     private val storage = Firebase.storage
 
     fun uploadToCloud(image: JuliaImage): Observable<GalleryViewModel.UploadStatus> {
-        val imageRef = storage.reference.child("${image.name}.jpg")
+        val imageRef = storage.reference.child("${image.name}_${System.currentTimeMillis()}.jpg")
         val stream = ByteArrayOutputStream()
         image.bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
         image.bitmap.recycle()
