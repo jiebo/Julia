@@ -31,8 +31,8 @@ class JuliaView @JvmOverloads constructor(
         color = ContextCompat.getColor(context, android.R.color.black)
         strokeWidth = 5f
     }
-    private var constantX = 0f
-    private var constantY = -0.8f
+    private var constantX = -0.70176f
+    private var constantY = -0.3842f
     private var zoom = ZOOM
     private var panX = PAN_X
     private var panY = PAN_Y

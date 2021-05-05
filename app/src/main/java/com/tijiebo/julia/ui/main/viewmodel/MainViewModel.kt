@@ -8,7 +8,7 @@ import io.reactivex.subjects.PublishSubject
 class MainViewModel() : ViewModel() {
 
     val resetJuliaView: PublishSubject<Boolean> = PublishSubject.create()
-    val updateJuliaView: MutableLiveData<PointF> = MutableLiveData(PointF(0f, -0.8f))
+    val updateJuliaView: MutableLiveData<PointF> = MutableLiveData(PointF(-0.70176f, -0.3842f))
     val zoomJuliaView: MutableLiveData<Float> = MutableLiveData(1f)
     val enableZoomIn: MutableLiveData<Boolean> = MutableLiveData(true)
     val enableZoomOut: MutableLiveData<Boolean> = MutableLiveData(false)
