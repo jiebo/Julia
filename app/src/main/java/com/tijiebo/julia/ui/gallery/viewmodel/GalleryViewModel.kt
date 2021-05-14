@@ -38,6 +38,7 @@ class GalleryViewModel : ViewModel() {
                 .subscribe({
                     uploadProgress.onNext(it)
                 }, {
+                    uploadProgress.onNext(UploadStatus.Failure)
                 })
         )
     }

@@ -22,7 +22,7 @@ class GalleryRepo {
             imageRef.putBytes(stream.toByteArray())
                 .addOnProgressListener { emitter.onNext(GalleryViewModel.UploadStatus.Pending((it.bytesTransferred / it.totalByteCount).toFloat())) }
                 .addOnSuccessListener { emitter.onNext(GalleryViewModel.UploadStatus.Success) }
-                .addOnFailureListener { emitter.onNext(GalleryViewModel.UploadStatus.Failure) }
+                .addOnFailureListener { emitter.onError(Throwable()) }
         }
     }
 
@@ -31,10 +31,7 @@ class GalleryRepo {
             storage.reference.listAll()
                 .addOnSuccessListener {
                     var count = it.items.size
-                    if (count == 0) {
-                        emitter.onComplete()
-                        return@addOnSuccessListener
-                    }
+                    if (count == 0) emitter.onComplete()
                     for (item in it.items) {
                         item.downloadUrl
                             .addOnSuccessListener { uri ->
